@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">Tech Bulletin</string>
+    <string name="hacker_news_icon">Icon</string>
+    <string name="headline">i am always baked arjun</string>
+    <string name="timestamp">02/11/1995</string>
 </resources>
