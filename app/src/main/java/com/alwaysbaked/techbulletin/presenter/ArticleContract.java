@@ -9,10 +9,12 @@ public interface ArticleContract {
     interface View{
         void onGetResultSuccess(List<Article> articles);
         void onGetResultFailure(String message);
+        void startArticleActivity(Article article);
     }
 
     interface Presenter{
         void getArticle();
+        void onArticleClick(Article article);
     }
 
     interface GetAPIData{

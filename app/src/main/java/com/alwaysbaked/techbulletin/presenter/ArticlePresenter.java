@@ -20,6 +20,11 @@ public class ArticlePresenter implements ArticleContract.Presenter, ArticleContr
     }
 
     @Override
+    public void onArticleClick(Article article) {
+        articleView.startArticleActivity(article);
+    }
+
+    @Override
     public void onSuccess(List<Article> list) {
         articleView.onGetResultSuccess(list);
     }

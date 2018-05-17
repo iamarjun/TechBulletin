@@ -11,6 +11,8 @@ import android.widget.TextView;
 
 import com.alwaysbaked.techbulletin.R;
 import com.alwaysbaked.techbulletin.model.Article;
+import com.alwaysbaked.techbulletin.presenter.ArticleContract;
+import com.alwaysbaked.techbulletin.presenter.ArticlePresenter;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -19,10 +21,12 @@ public class ArticleAdapter extends RecyclerView.Adapter<ArticleAdapter.MyViewHo
 
     private Context context;
     private List<Article> articles;
+    private ArticlePresenter presenter;
 
-    public ArticleAdapter(Context context, List<Article> articles) {
+    public ArticleAdapter(Context context, List<Article> articles, ArticlePresenter presenter) {
         this.context = context;
         this.articles = articles;
+        this.presenter = presenter;
     }
 
     @NonNull
@@ -44,15 +48,27 @@ public class ArticleAdapter extends RecyclerView.Adapter<ArticleAdapter.MyViewHo
         return articles.size();
     }
 
-    class MyViewHolder extends RecyclerView.ViewHolder {
+    class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         ImageView displayPicture;
         TextView headlines;
         TextView timestamp;
+        ViewGroup viewGroup;
+
         MyViewHolder(View itemView) {
             super(itemView);
-            displayPicture = itemView.findViewById(R.id.imageViewDisplayPicture);
+            //displayPicture = itemView.findViewById(R.id.imageViewDisplayPicture);
             headlines = itemView.findViewById(R.id.textViewHeadline);
             timestamp = itemView.findViewById(R.id.textViewTimestamp);
+            viewGroup = itemView.findViewById(R.id.articleItemList);
+            viewGroup.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View v) {
+
+            Article article = articles.get(this.getAdapterPosition());
+            presenter.onArticleClick(article);
+
         }
     }
 }
